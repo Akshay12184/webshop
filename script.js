@@ -4,5 +4,6 @@ function GetData() {
 
 
 function AddToCart() {
-    document.getElementById
+    document.getElementById('Cart');
+    
 }
