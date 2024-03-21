@@ -1,0 +1,87 @@
+.body {
+    background-color: rgb(226, 226, 226);
+}
+
+.img {
+    height: 135px;
+}
+
+.nav-bar {
+    background-color: #707070;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.nav-center {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-center li {
+    margin: 5px;
+    padding: 5px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+
+}
+.button-color {
+    background-color: #707070;
+    border-collapse: collapse;
+}
+
+.footer {
+    background-color: #696868;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 50%;
+    bottom: 0;
+    left: 25%;
+    position: fixed;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: 10px;
+    text-align: center;
+    font-family: arial;
+}
+
+.price {
+    color: grey;
+    font-size: 22px;
+}
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.card button:hover {
+    opacity: 0.7;
+}
+
+.checked {
+    color: orange;
+}
