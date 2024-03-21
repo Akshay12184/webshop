@@ -3,7 +3,8 @@ function GetData() {
 }
 
 
-function AddToCart() {
-    document.getElementById('Cart');
-    
+function addToCart() {
+onclick('Add to Cart')
+
 }
+
