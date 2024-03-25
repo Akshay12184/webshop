@@ -7,9 +7,9 @@
     },
     {
         "id": 2,
-        "name": "Razor Keyboard",
+        "name": "Gaming Keyboard",
         "price": 100,
-        "image": "image/keyboard.jpg"
+        "image": "image/keyboard2.avif"
     },
     {
         "id": 3,
@@ -45,6 +45,6 @@
         "id": 8,
         "name": "vr headset",
         "price": 340,
-        "image": "image/vr.jpg"
+        "image": "image/vr2.jpg"
     }
 ]
