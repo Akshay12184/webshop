@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>webshop-test</title>
+    <title>webshop</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -29,10 +29,14 @@
             
         </div>
         <div class="btn">
-            <button class="close">CLOSE</button>
-            <button class="checkOut">Check Out</button>
-        </div>
+            <div class="popup-container" id="popupContainer">
+                <div class="popup">
+                    <button class="close" onclick="closePopup()">CLOSE</button>
+                    <button class="confirm" onclick="confirmPurchase()">Confirm Purchase</button>
+                </div>
+            </div>
+                <button class="CheckOut" onclick="showPopup()">Check Out</button>
+        </div>            
     </div>
-
 </body>
 </html>

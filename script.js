@@ -130,7 +130,7 @@ const changeQuantityCart = (product_id, type) => {
 
 const initApp = () => {
     // get product
-    fetch('test.json')
+    fetch('info.json')
     .then(response => response.json())
     .then(data => {
         products = data;
@@ -143,4 +143,23 @@ const initApp = () => {
         }
     })
 }
+
 initApp();
+
+function showPopup() {
+    var popupContainer = document.getElementById("popupContainer");
+    popupContainer.style.display = "block";
+}
+
+function closePopup() {
+    var popupContainer = document.getElementById("popupContainer");
+    popupContainer.style.display = "none";
+}
+
+function confirmPurchase() {
+    cart = [];
+    
+    addCartToHTML();
+    addCartToMemory();
+    closePopup();
+}
