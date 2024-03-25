@@ -1,124 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>webshop</title>
-        <script src="script.js" defer></script>
-        <link rel="stylesheet" href="style.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    </head>
-
-    <body>
-        <div class="nav-bar">
-            <img class="img" src="/webshop/images cards/logo.png" alt="Cart"/>
-
-            <ul class="nav-center">
-                <li>HOME</li>
-                <li>SALES</li>
-                <li>CONTENT</li>
-                <li>POINTS</li>
-                <li>MEER</li>
-            </ul>
-
-            <div class="nav-right">
-                <a href="https://example.com/checkout">
-                    <button class="button-color">
-                        <img class="shopping-cart" src="/webshop/images cards/icons8-shopping-cart-48.png" alt="" />
-                    </button>
-                </a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webshop-test</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="">
+    
+    <div class="container">
+        <header>
+            <div class="title">Tech Webshop</div>
+            <div class="icon-cart">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
+                </svg>
+                <span>0</span>
             </div>
+        </header>
+        <div class="listProduct">
+
+        </div>
+    </div>
+    <div class="cartTab">
+        <h1>Shopping Cart</h1>
+        <div class="listCart">
             
         </div>
-
-        <div class="card-container">
-            <div class="card">
-                <img src="" alt="Denim Jeans" style="width: 100%" />
-                <h1>Tailored Jeans</h1>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p class="price">$29.99</p>
-                <p>Some text about the jeans..</p>
-                <p><button id="Cart">Add to Cart</button></p>
-            </div>
-
-            <div class="card">
-                <img src="" alt="Denim t-shirt" style="width: 100%" />
-                <h1>Tailored t-shirt</h1>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <p class="price">$9.99</p>
-                <p>Some text about the t-shirt..</p>
-                <p><button id="Cart">Add to Cart</button></p>
-            </div>
-
-            <div class="card">
-                <img src="" alt="Denim Shoes" style="width: 100%" />
-                <h1>Tailored Shoes</h1>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p class="price">$39.99</p>
-                <p>Some text about the Shoes..</p>
-                <p><button id="Cart">Add to Cart</button></p>
-            </div>
+        <div class="btn">
+            <button class="close">CLOSE</button>
+            <button class="checkOut">Check Out</button>
         </div>
+    </div>
 
-        <div class="card-container">
-            <div class="card">
-                <img src="" alt="Denim Jeans" style="width: 100%" />
-                <h1>Tailored Jeans</h1>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p class="price">$19.99</p>
-                <p>Some text about the jeans..</p>
-                <p><button id="Cart">Add to Cart</button></p>
-            </div>
-
-            <div class="card">
-                <img src="" alt="Denim Bag" style="width: 100%" />
-                <h1>Tailored Bag</h1>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p class="price">$99.99</p>
-                <p>Some text about the jeans..</p>
-                <p><button id="Cart">Add to Cart</button></p>
-            </div>
-
-            <div class="card">
-                <img src="" alt="Denim Cap" style="width: 100%" />
-                <h1>Tailored Cap</h1>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <p class="price">$5.99</p>
-                <p>Some text about the jeans..</p>
-                <p><button id="Cart">Add to Cart</button></p>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <div>
-                <p>Offical page of desinged by yash™</p>
-            </div>
-        </footer>
-    </body>
+</body>
 </html>
