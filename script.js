@@ -65,6 +65,7 @@ const addCartToMemory = () => {
 const addCartToHTML = () => {
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
+    let totalPrice = 0;
     if(cart.length > 0){
         cart.forEach(item => {
             totalQuantity = totalQuantity +  item.quantity;
@@ -76,11 +77,11 @@ const addCartToHTML = () => {
             let info = products[positionProduct];
             listCartHTML.appendChild(newItem);
             newItem.innerHTML = `
-            <div class="image">
+                <div class="image">
                     <img src="${info.image}">
                 </div>
                 <div class="name">
-                ${info.name}
+                    ${info.name}
                 </div>
                 <div class="totalPrice">$${info.price * item.quantity}</div>
                 <div class="quantity">
@@ -89,9 +90,15 @@ const addCartToHTML = () => {
                     <span class="plus">+</span>
                 </div>
             `;
-        })
+            totalPrice += info.price * item.quantity;
+        });
     }
     iconCartSpan.innerText = totalQuantity;
+
+    let totalElement = document.createElement('div');
+    totalElement.classList.add('total');
+    totalElement.innerText = `Total: $${totalPrice.toFixed(2)}`;
+    listCartHTML.appendChild(totalElement);
 }
 
 listCartHTML.addEventListener('click', (event) => {
@@ -147,12 +154,12 @@ const initApp = () => {
 initApp();
 
 function showPopup() {
-    var popupContainer = document.getElementById("popupContainer");
+    const popupContainer = document.getElementById("popupContainer");
     popupContainer.style.display = "block";
 }
 
 function closePopup() {
-    var popupContainer = document.getElementById("popupContainer");
+    const popupContainer = document.getElementById("popupContainer");
     popupContainer.style.display = "none";
 }
 
