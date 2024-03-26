@@ -159,8 +159,10 @@ const initApp = () => {
             cart = JSON.parse(localStorage.getItem('cart'));
             addCartToHTML();
         }
+        document.getElementById("confirmPurchaseBtn").addEventListener("click", confirmPurchase);
     })
 }
+
 
 initApp();
 
