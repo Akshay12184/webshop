@@ -4,55 +4,55 @@
         "name": "Gaming Headset",
         "amount": 20,
         "price": 50,
-        "image": "/image/headset.webp"
+        "image": "/public/image/headset.webp"
     },
     {
         "id": 2,
         "name": "Gaming Keyboard",
         "amount": 15,
         "price": 100,
-        "image": "/image/keyboard2.avif"
+        "image": "/public/image/keyboard2.avif"
     },
     {
         "id": 3,
         "name": "Razor Mouse",
         "amount": 13,
         "price": 70,
-        "image": "/image/mouse.jpg"
+        "image": "/public/image/mouse.jpg"
     },
     {
         "id": 4,
         "name": "Alienware Monitor",
         "amount": 10,
         "price": 250,
-        "image": "/image/monitor.jpg"
+        "image": "/public/image/monitor.jpg"
     },
     {
         "id": 5,
         "name": "PS5",
         "amount": 5,
         "price": 500,
-        "image": "/image/ps5.jpg"
+        "image": "/public/image/ps5.jpg"
     },
     {
         "id": 6,
         "name": "Xbox X Series",
         "amount": 5,
         "price": 450,
-        "image": "/image/xbox.webp"
+        "image": "/public/image/xbox.webp"
     },
     {
         "id": 7,
         "name": "Gaming Chair",
         "amount": 3,
         "price": 550,
-        "image": "/image/chair.webp"
+        "image": "/public/image/chair.webp"
     },
     {
         "id": 8,
         "name": "vr headset",
         "amount": 7,
         "price": 340,
-        "image": "/image/vr2.jpg"
+        "image": "/public/image/vr2.jpg"
     }
 ]
