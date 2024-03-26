@@ -41,24 +41,35 @@ closeCart.addEventListener('click', () => {
             addToCart(id_product);
         }
     })
-const addToCart = (product_id) => {
-    let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
-    if(cart.length <= 0){
-        cart = [{
-            product_id: product_id,
-            quantity: 1
-        }];
-    }else if(positionThisProductInCart < 0){
-        cart.push({
-            product_id: product_id,
-            quantity: 1
-        });
-    }else{
-        cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
+    const addToCart = (product_id) => {
+        let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
+        let positionProduct = products.findIndex((value) => value.id == product_id);
+        
+        if (positionProduct >= 0) {
+            let product = products[positionProduct];
+            if (product.amount > 0) {
+                if (cart.length <= 0) {
+                    cart = [{
+                        product_id: product_id,
+                        quantity: 1
+                    }];
+                } else if (positionThisProductInCart < 0) {
+                    cart.push({
+                        product_id: product_id,
+                        quantity: 1
+                    });
+                } else {
+                    cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
+                }
+                products[positionProduct].amount -= 1;
+                addCartToHTML();
+                addCartToMemory();
+            } else {
+                console.log('Maximum amount reached for this product.');
+            }
+        }
     }
-    addCartToHTML();
-    addCartToMemory();
-}
+
 const addCartToMemory = () => {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
