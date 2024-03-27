@@ -1,3 +1,4 @@
+
 body {
     font-family: Poppins;
     background-color: rgb(255, 255, 255);
@@ -21,14 +22,6 @@ header{
     transition: transform .5s;
 }
 #Btn1 {
-    background-color: #3700ff;
-    color: #ffffff;
-    border: none;
-    padding: 5px 10px;
-    margin-top: 10px;
-    border-radius: 20px;
-}
-#Btn2 {
     background-color: #000000;
     color: #ffffff;
     border: none;
@@ -36,16 +29,11 @@ header{
     margin-top: 10px;
     border-radius: 20px;
 }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th, td {
-    border: 1px solid #000000;
-    text-align: left;
-    padding: 8px;
-}
-th {
-    background-color: #f2f2f2;
+#Btn2 {
+    background-color: #003cff;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 20px;
 }
