@@ -8,6 +8,7 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
+
 }
 .title{
     font-size: xx-large;
@@ -16,7 +17,7 @@ header{
 .container{
     width: 900px;
     margin: auto;
-    max-width: 90vw;
+    max-width: 100%;
     text-align: center;
     padding-top: 10px;
     transition: transform .5s;

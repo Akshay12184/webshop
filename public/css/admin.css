@@ -21,8 +21,8 @@ header{
     transition: transform .5s;
 }
 #Btn1 {
-    background-color: #3700ff;
-    color: #ffffff;
+    background-color: #001aff;
+        color: #ffffff;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
@@ -30,22 +30,31 @@ header{
 }
 #Btn2 {
     background-color: #000000;
-    color: #ffffff;
+    color: #eee;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
     border-radius: 20px;
 }
 
-table {
+.table-container {
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 50%;
     border-collapse: collapse;
 }
+
 th, td {
-    border: 1px solid #000000;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
     text-align: left;
     padding: 8px;
 }
+
 th {
     background-color: #f2f2f2;
 }
