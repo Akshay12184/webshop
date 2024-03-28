@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function () {
 // Function to reset the table content
 const resetTable = () => {
     const table = document.getElementById('productTable');
     table.innerHTML = '';
 }
+
 // Function to populate the table with data from JSON file
 const populateTable = (data) => {
     const table = document.getElementById('productTable');
@@ -35,7 +35,7 @@ const populateTable = (data) => {
         editButton.style.backgroundColor = 'blue';
         editButton.style.color = 'white';
         editButton.addEventListener('click', () => {
-        window.location.href = "edit.html";
+            window.location.href = "edit.html";
         }); 
         editCell.appendChild(editButton);
 
@@ -52,26 +52,29 @@ const populateTable = (data) => {
     });
 }
 
-// fetch json 
 const initapp = () => {
     fetch('/info.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        resetTable();
-        populateTable(data);
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            resetTable();
+            populateTable(data);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
 }
 
-initapp();
-
-const button = document.getElementById('fetchButton');
-button.addEventListener('click', fetchDataAndPopulateTable);
+// Add event listener for DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Call initapp when DOMContentLoaded event is fired
+    initapp();
 });
+
+// Add event listener for the fetchButton
+const button = document.getElementById('fetchButton');
+button.addEventListener('click', initapp);

@@ -7,7 +7,6 @@ let closeCart = document.querySelector('.close');
 let products = [];
 let cart = [];
 
-
 iconCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
 })
@@ -15,25 +14,26 @@ closeCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
 })
 
-    const addDataToHTML = () => {
+const addDataToHTML = () => {
     // removes data default from HTML
 
-        // adds new data 
-        if(products.length > 0) // if product has data
-        {
-            products.forEach(product => {
-                let newProduct = document.createElement('div');
-                newProduct.dataset.id = product.id;
-                newProduct.classList.add('item');
-                newProduct.innerHTML = 
-                `<img src="${product.image}" alt="">
-                <h2>${product.name}</h2>
-                <div class="price">$${product.price}</div>
-                <button class="addCart">Add To Cart</button>`;
-                listProductHTML.appendChild(newProduct);
-            });
-        }
+    // adds new data 
+    if(products.length > 0) // if product has data
+    {
+        products.forEach(product => {
+            let newProduct = document.createElement('div');
+            newProduct.dataset.id = product.id;
+            newProduct.classList.add('item');
+            newProduct.innerHTML = 
+            `<img src="${product.image}" alt="">
+            <h2>${product.name}</h2>
+            <div class="price">$${product.price}</div>
+            <button class="addCart" ${product.amount <= 0 ? 'disabled' : ''}>Add To Cart</button>`;
+            listProductHTML.appendChild(newProduct);
+        });
     }
+}
+
     listProductHTML.addEventListener('click', (event) => {
         let positionClick = event.target;
         if(positionClick.classList.contains('addCart')){
@@ -176,7 +176,6 @@ function closePopup() {
 
 function confirmPurchase() {
     cart = [];
-    
     addCartToHTML();
     addCartToMemory();
     closePopup();
