@@ -181,3 +181,24 @@ function confirmPurchase() {
     addCartToMemory();
     closePopup();
 }
+
+function savePurchase() {
+    const purchaseHistory = localStorage.getItem('purchaseHistory');
+    const currentPurchase = {
+        cart: cart,
+        timestamp: new Date().getTime()
+    };
+
+    if (purchaseHistory) {
+        const purchaseArray = JSON.parse(purchaseHistory);
+        purchaseArray.push(currentPurchase);
+        localStorage.setItem('purchaseHistory', JSON.stringify(purchaseArray));
+    } else {
+        localStorage.setItem('purchaseHistory', JSON.stringify([currentPurchase]));
+    }
+
+    // Clear cart on confirm
+    cart = [];
+    addCartToHTML();
+    addCartToMemory();
+}
