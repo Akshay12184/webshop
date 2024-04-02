@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/public/css/add.css">
+    <script src="public/js/add.js"></script>
 </head>
 <body>
 
@@ -13,11 +14,20 @@
             <div class="title">admin panel</div>
             <button id="Btn1">orders</button>
             <a href="products.html"><button id="Btn2">products</button></a>
+            <a href="products.html"><button id="btn3">go back</button></a>
         </header>
     </div>
-    
+
         <h1>add an item to the webshop</h1>
 
-        
+<form id="myForm" onsubmit="return validateForm()">
+    <label for="name">Item name</label>
+    <input type="text" id="name" name="name"><br>
+    <label for="price">Item price</label>
+    <input type="text" id="price" name="price"><br>
+    <input type="file" accept="image/*" required>
+    <input type="submit" value="edit">
+</form>
+
 </body>
 </html>

@@ -20,6 +20,7 @@ header{
     max-width: 100%;
     text-align: center;
     padding-top: 10px;
+    padding-bottom: 5px;
     transition: transform .5s;
 }
 #Btn1 {
@@ -37,6 +38,23 @@ header{
     padding: 5px 10px;
     margin-top: 10px;
     border-radius: 20px;
+}
+.btn3 {
+background-color: #ffffff;
+color: #000000;
+border: none;
+padding: 5px 10px;
+margin-top: 10px;
+border-radius: 20px;
+}
+
+.btn4 {
+background-color: #001aff;
+color: #ffffff;
+border: none;
+padding: 5px 10px;
+margin-top: 10px;
+border-radius: 20px;
 }
 .ProductContainer {
     width: 100%;
