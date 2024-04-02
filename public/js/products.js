@@ -1,13 +1,16 @@
-// Function to reset the table content
+let originalData = [];
+
 const resetTable = () => {
     const table = document.getElementById('productTable');
     table.innerHTML = '';
+    populateTable(originalData);
 }
 
-// Function to populate the table with data from JSON file
+// Function to populate the table with data
+// and 2 buttons 1 you can edit with and the other to remove 
 const populateTable = (data) => {
     const table = document.getElementById('productTable');
-
+    
     const headerRow = table.insertRow();
     for (const key in data[0]) {
         const headerCell = headerRow.insertCell();
@@ -45,8 +48,8 @@ const populateTable = (data) => {
         removeButton.style.backgroundColor = 'red';
         removeButton.style.color = 'white';
         removeButton.addEventListener('click', () => {
-            //todo logic for removing on click
-            onclick("remove")
+            const row = removeButton.parentNode.parentNode;
+            row.remove();
         });
         removeCell.appendChild(removeButton);
     });
@@ -61,20 +64,19 @@ const initapp = () => {
             return response.json();
         })
         .then(data => {
-            resetTable();
-            populateTable(data);
+            originalData = data;
+            resetTable()
         })
         .catch(error => {
             console.error('Fetch error:', error);
         });
 }
 
-// Add event listener for DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Call initapp when DOMContentLoaded event is fired
     initapp();
 });
 
-// Add event listener for the fetchButton
-const button = document.getElementById('fetchButton');
-button.addEventListener('click', initapp);
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('fetchButton');
+    button.addEventListener('click', resetTable);
+});
