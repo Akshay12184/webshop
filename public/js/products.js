@@ -1,22 +1,21 @@
 let originalData = [];
 
-const resetTable = () => {
+const resetTable = (data) => {
     const table = document.getElementById('productTable');
     table.innerHTML = '';
-    populateTable(originalData);
+    populateTable(data);
 }
 
-// Function to populate the table with data
-// and 2 buttons 1 you can edit with and the other to remove 
 const populateTable = (data) => {
     const table = document.getElementById('productTable');
     
     const headerRow = table.insertRow();
-    for (const key in data[0]) {
+    const headerKeys = Object.keys(data[0]);
+    headerKeys.forEach(key => {
         const headerCell = headerRow.insertCell();
         headerCell.textContent = key;
-        headerCell.style.backgroundColor = "lightgrey"
-    }
+        headerCell.style.backgroundColor = "lightgrey";
+    });
     const editHeaderCell = headerRow.insertCell();
     editHeaderCell.textContent = 'Edit';
     editHeaderCell.style.backgroundColor = 'lightgrey';
@@ -27,10 +26,18 @@ const populateTable = (data) => {
 
     data.forEach(item => {
         const row = table.insertRow();
-        for (const key in item) {
+        headerKeys.forEach(key => {
             const cell = row.insertCell();
-            cell.textContent = item[key];
-        }
+            if (key === 'image') {
+                const img = document.createElement('img');
+                img.src = item[key];
+                img.width = 50;
+                img.height = 50;
+                cell.appendChild(img);
+            } else {
+                cell.textContent = item[key];
+            }
+        });
 
         const editCell = row.insertCell();
         const editButton = document.createElement('button');
@@ -65,7 +72,7 @@ const initapp = () => {
         })
         .then(data => {
             originalData = data;
-            resetTable()
+            resetTable(originalData);
         })
         .catch(error => {
             console.error('Fetch error:', error);
@@ -74,9 +81,33 @@ const initapp = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     initapp();
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-    const button = document.getElementById('fetchButton');
-    button.addEventListener('click', resetTable);
+    const addProductForm = document.getElementById('addProductForm');
+    addProductForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const productName = document.getElementById('productName').value;
+        const productPrice = document.getElementById('productPrice').value;
+        const productImage = document.getElementById('productImage').files[0];
+    
+        if (!productName || !productPrice || !productImage) {
+            alert('Please fill in all fields and select an image.');
+            return;
+        }
+    
+        const newProduct = {
+            name: productName,
+            price: productPrice,
+            image: URL.createObjectURL(productImage)
+        };
+        const newData = [...originalData];
+        newData.push(newProduct);
+    
+        resetTable(newData);
+    
+        addProductForm.reset();
+    });
+
+    const resetButton = document.getElementById('fetchButton');
+    resetButton.addEventListener('click', () => resetTable(originalData));
 });
