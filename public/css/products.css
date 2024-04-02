@@ -73,3 +73,45 @@ border-radius: 20px;
 #productTable tr {
     border-bottom: 1px solid #000000;
 }
+
+.add-product-form {
+    width: 50%;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-form h2 {
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.add-product-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.add-product-form input[type="text"],
+.add-product-form input[type="file"] {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-product-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #001aff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-product-form button:hover {
+    background-color: #0000ff;
+}
