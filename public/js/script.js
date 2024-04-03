@@ -88,7 +88,7 @@ if (cart.length > 0) {
         let info = products[positionProduct];
         listCartHTML.appendChild(newItem);
 
-        let price = parseFloat(info.price.replace('$', ''));
+        let price = parseFloat(info.price);
         newItem.innerHTML = `
             <div class="image">
                 <img src="${info.image}">
