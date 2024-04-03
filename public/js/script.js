@@ -77,33 +77,36 @@ const addCartToHTML = () => {
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
     let totalPrice = 0;
-    if(cart.length > 0){
-        cart.forEach(item => {
-            totalQuantity = totalQuantity +  item.quantity;
-            let newItem = document.createElement('div');
-            newItem.classList.add('item');
-            newItem.dataset.id = item.product_id;
+if (cart.length > 0) {
+    cart.forEach(item => {
+        totalQuantity += item.quantity;
+        let newItem = document.createElement('div');
+        newItem.classList.add('item');
+        newItem.dataset.id = item.product_id;
 
-            let positionProduct = products.findIndex((value) => value.id == item.product_id);
-            let info = products[positionProduct];
-            listCartHTML.appendChild(newItem);
-            newItem.innerHTML = `
-                <div class="image">
-                    <img src="${info.image}">
-                </div>
-                <div class="name">
-                    ${info.name}
-                </div>
-                <div class="totalPrice">${info.price * item.quantity}</div>
-                <div class="quantity">
-                    <span class="minus">-</span>
-                    <span>${item.quantity}</span>
-                    <span class="plus">+</span>
-                </div>
-            `;
-            totalPrice += info.price * item.quantity;
-        });
-    }
+        let positionProduct = products.findIndex((value) => value.id == item.product_id);
+        let info = products[positionProduct];
+        listCartHTML.appendChild(newItem);
+
+        let price = parseFloat(info.price.replace('$', ''));
+        newItem.innerHTML = `
+            <div class="image">
+                <img src="${info.image}">
+            </div>
+            <div class="name">
+                ${info.name}
+            </div>
+            <div class="totalPrice">$${(price * item.quantity).toFixed(2)}</div> <!-- Add $ sign here -->
+            <div class="quantity">
+                <span class="minus">-</span>
+                <span>${item.quantity}</span>
+                <span class="plus">+</span>
+            </div>
+        `;
+        totalPrice += price * item.quantity;
+    });
+}
+
     iconCartSpan.innerText = totalQuantity;
 
     let totalElement = document.createElement('div');
