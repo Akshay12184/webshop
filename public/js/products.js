@@ -6,6 +6,7 @@ const resetTable = (data) => {
     populateTable(data);
 }
 
+// Function to populate the table with product data
 const populateTable = (data) => {
     const table = document.getElementById('productTable');
     
@@ -66,6 +67,13 @@ const populateTable = (data) => {
     });
 }
 
+const editedProductName = localStorage.getItem('editedProductName');
+const editedProductPrice = localStorage.getItem('editedProductPrice');
+
+if (editedProductName && editedProductPrice) {
+    document.getElementById('productName').textContent = editedProductName;
+    document.getElementById('productPrice').textContent = editedProductPrice;
+}
 
 const initapp = () => {
     fetch('/info.json')
@@ -109,10 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
         newData.push(newProduct);
     
         resetTable(newData);
-    
         addProductForm.reset();
     });
-
     const resetButton = document.getElementById('fetchButton');
     resetButton.addEventListener('click', () => resetTable(originalData));
 });

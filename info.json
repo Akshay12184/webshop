@@ -38,21 +38,21 @@
         "id": 6,
         "name": "Xbox X Series",
         "amount": 5,
-        "price": "$440",
+        "price": "$450",
         "image": "/public/image/xbox.webp"
     },
     {
         "id": 7,
         "name": "Gaming Chair",
         "amount": 3,
-        "price": "$340",
+        "price": "$375",
         "image": "/public/image/chair.webp"
     },
     {
         "id": 8,
         "name": "VR Headset",
         "amount": 7,
-        "price": "$340",
+        "price": "$246",
         "image": "/public/image/vr2.jpg"
     }
 ]
