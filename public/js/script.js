@@ -96,7 +96,7 @@ if (cart.length > 0) {
             <div class="name">
                 ${info.name}
             </div>
-            <div class="totalPrice">$${(price * item.quantity).toFixed(2)}</div> <!-- Add $ sign here -->
+            <div class="totalPrice">$${(price * item.quantity).toFixed(2)}</div>
             <div class="quantity">
                 <span class="minus">-</span>
                 <span>${item.quantity}</span>
