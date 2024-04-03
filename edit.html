@@ -11,12 +11,22 @@
     <div class="container">
         <header>
             <div class="title">admin panel</div>
-            <button id="Btn1">orders</button>
-            <a href="products.html"><button id="Btn2">products</button></a>
+            <a href="admin.html"><button id="Btn1"> back to orders</button></a>
+            <a href="products.html"><button id="Btn2"> back to products</button></a>
         </header>
     </div>
 
-    <h1>edit products</h1>
+    <div class="edit-product-form">
+        <h2>Edit Product</h2>
+        <form id="editProductForm">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName"><br>
+            <label for="productPrice">Product Price:</label>
+            <input type="text" id="productPrice" name="productPrice"><br> 
+            <input type="file" id="productImage" name="productImage">
+            <button type="submit">Add</button>
+        </form>
+    </div>
 
 </body>
 </html>
