@@ -45,8 +45,12 @@ const populateTable = (data) => {
         editButton.style.backgroundColor = 'blue';
         editButton.style.color = 'white';
         editButton.addEventListener('click', () => {
-            window.location.href = "edit.html";
-        }); 
+            const queryParams = new URLSearchParams();
+            Object.entries(item).forEach(([key, value]) => {
+                queryParams.append(key, value);
+            });
+            window.location.href = `edit.html?${queryParams.toString()}`;
+        });
         editCell.appendChild(editButton);
 
         const removeCell = row.insertCell();
@@ -61,6 +65,7 @@ const populateTable = (data) => {
         removeCell.appendChild(removeButton);
     });
 }
+
 
 const initapp = () => {
     fetch('/info.json')
