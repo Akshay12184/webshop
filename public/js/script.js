@@ -28,7 +28,7 @@ const addDataToHTML = () => {
             `<img src="${product.image}" alt="">
             <h2>${product.name}</h2>
             <div class="price">${product.price}</div>
-            <button class="addCart" ${product.amount <= 0 ? 'disabled' : ''}>Add To Cart</button>`;
+            <button class="addCart">Add To Cart</button>`;
             listProductHTML.appendChild(newProduct);
         });
     }
