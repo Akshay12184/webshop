@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const productName = getUrlParameter('name');
-    const productPrice = getUrlParameter('price');
+    const productPrice = parseFloat(getUrlParameter('price'));
 
     document.getElementById('productName').value = productName;
     document.getElementById('productPrice').value = productPrice;
@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         const editedProductName = document.getElementById('productName').value;
-        const editedProductPrice = document.getElementById('productPrice').value;
+        const editedProductPrice = parseFloat(document.getElementById('productPrice').value);
 
-        if (!editedProductName || !editedProductPrice) {
-            alert('Please fill in product name and price.');
+        if (!editedProductName || isNaN(editedProductPrice)) {
+            alert('Please fill in product name and a valid price.');
             return;
         }
 
@@ -27,11 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
             originalData = [];
         }
 
-        // Find the index of the product being edited
-        const index = originalData.findIndex(item => item.name === productName && item.price === productPrice);
+        const index = originalData.findIndex(item => item.name === editedProductName && parseFloat(item.price) === editedProductPrice);
         if (index !== -1) {
             originalData[index].name = editedProductName;
-            originalData[index].price = editedProductPrice;
+            originalData[index].price = editedProductPrice.toString();
             localStorage.setItem('productData', JSON.stringify(originalData));
         }
 
