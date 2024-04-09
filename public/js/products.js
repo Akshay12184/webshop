@@ -5,7 +5,8 @@ const resetTable = (data) => {
     table.innerHTML = '';
     populateTable(data);
 }
-// populates table with data 
+
+// Populates table with data 
 const populateTable = (data) => {
     const table = document.getElementById('productTable');
     
@@ -61,14 +62,14 @@ const populateTable = (data) => {
         removeButton.addEventListener('click', () => {
             const index = originalData.indexOf(item);
             originalData.splice(index, 1);
-            localStorage.setItem('products', JSON.stringify(originalData));
+            localStorage.setItem('productData', JSON.stringify(originalData)); // Change 'products' to 'productData'
             resetTable(originalData);
         });
         removeCell.appendChild(removeButton);
     });
 }
 
-// gets the orginal data from the json file
+// Gets the original data from the JSON file
 const fetchOriginalData = () => {
     fetch('/info.json')
         .then(response => {
@@ -87,7 +88,7 @@ const fetchOriginalData = () => {
 }
 
 const initapp = () => {
-    const savedData = localStorage.getItem('products');
+    const savedData = localStorage.getItem('productData');
     if (savedData) {
         originalData = JSON.parse(savedData);
         resetTable(originalData);
@@ -96,7 +97,7 @@ const initapp = () => {
     }
 }
 
-// resets localstorage and displays original data 
+// Resets local storage and displays original data 
 document.addEventListener('DOMContentLoaded', () => {
     initapp();
 
@@ -119,14 +120,27 @@ document.addEventListener('DOMContentLoaded', () => {
             image: URL.createObjectURL(productImage)
         };
         originalData.push(newProduct);
-        localStorage.setItem('products', JSON.stringify(originalData));
+        localStorage.setItem('productData', JSON.stringify(originalData));
         resetTable(originalData);
         addProductForm.reset();
     });
 
     const resetButton = document.getElementById('fetchButton');
     resetButton.addEventListener('click', () => {
-        localStorage.removeItem('products');
+        localStorage.removeItem('productData');
         fetchOriginalData();
     });
 });
+
+function updateProductInTable(productName, productPrice, productImage) {
+    let originalData = JSON.parse(localStorage.getItem('productData')) || [];
+
+    const productIndex = originalData.findIndex(product => product.name === productName);
+    if (productIndex !== -1) {
+        originalData[productIndex].price = productPrice;
+        originalData[productIndex].image = productImage;
+
+        localStorage.setItem('productData', JSON.stringify(originalData));
+        resetTable(originalData);
+    }
+}
