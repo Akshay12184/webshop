@@ -17,13 +17,6 @@ closeCart.addEventListener('click', () => {
 const addDataToHTML = () => {
     // removes data default from HTML
 
-
-    const addDataToHTML = (newProducts) => {
-    if (newProducts) {
-    
-    }
-}
-
     // adds new data 
     if(products.length > 0) // if product has data
     {
@@ -193,20 +186,4 @@ function confirmPurchase() {
     addCartToHTML();
     addCartToMemory();
     closePopup();
-}
-
-
-const refreshProductData = () => {
-    // Fetch product data from localStorage and update the display
-    const savedProducts = localStorage.getItem('productData');
-    if (savedProducts) {
-        const products = JSON.parse(savedProducts);
-        // Update your display with the new product data using addDataToHTML
-        addDataToHTML(products); // Pass the products data to the addDataToHTML function
-    }
-}
-
-
-function triggerDataRefresh() {
-    refreshProductData();
 }
