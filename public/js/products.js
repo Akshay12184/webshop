@@ -104,16 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const addProductForm = document.getElementById('addProductForm');
     addProductForm.addEventListener('submit', function(event) {
         event.preventDefault();
-    
+
         const productName = document.getElementById('productName').value;
         const productPrice = document.getElementById('productPrice').value;
         const productImage = document.getElementById('productImage').files[0];
-    
+
         if (!productName || !productPrice || !productImage) {
             alert('Please fill in all fields and select an image.');
             return;
         }
-    
+
         const newProduct = {
             name: productName,
             price: productPrice,
@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
 function updateProductInTable(productName, productPrice, productImage) {
     let originalData = JSON.parse(localStorage.getItem('productData')) || [];
 
@@ -143,4 +144,9 @@ function updateProductInTable(productName, productPrice, productImage) {
         localStorage.setItem('productData', JSON.stringify(originalData));
         resetTable(originalData);
     }
+}
+
+function triggerDataRefresh() {
+    // Call the function to refresh product data
+    refreshProductData(); // Assuming refreshProductData is defined somewhere in your script
 }

@@ -10,24 +10,42 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('productName').value = productName;
     document.getElementById('productPrice').value = productPrice;
 
+    const editProductForm = document.getElementById('editProductForm');
+
     editProductForm.addEventListener('submit', function(event) {
         event.preventDefault();
-    
+
         const editedProductName = document.getElementById('productName').value;
         const editedProductPrice = parseFloat(document.getElementById('productPrice').value);
-        const editedProductImage = document.getElementById('productImage').value;
-    
+
         if (!editedProductName || isNaN(editedProductPrice)) {
             alert('Please fill in product name and a valid price.');
             return;
         }
-    
-        updateProductInTable(editedProductName, editedProductPrice, editedProductImage);
-    
+
+        updateProductInTable(productName, editedProductName, editedProductPrice);
+
         window.location.href = '/products.html';
     });
-    
 });
+
+function updateProductInTable(productName, editedProductName, editedProductPrice) {
+    let originalData = JSON.parse(localStorage.getItem('productData')) || [];
+
+    const index = originalData.findIndex(item => item.name === productName);
+
+    if (index !== -1) {
+        originalData[index].name = editedProductName;
+        originalData[index].price = editedProductPrice;
+
+        localStorage.setItem('productData', JSON.stringify(originalData));
+
+        updateTable(originalData);
+    }
+}
+
+
+
 
 function updateProductInTable(productName, productPrice) {
     let originalData = JSON.parse(localStorage.getItem('productData')) || [];
@@ -63,5 +81,7 @@ function updateTable(data) {
 
         nameCell.textContent = product.name;
         priceCell.textContent = `$${product.price}`;
+
     });
 }
+
