@@ -19,9 +19,8 @@ const addDataToHTML = () => {
 
 
     const addDataToHTML = (newProducts) => {
-    // Check if newProducts is defined and not null
     if (newProducts) {
-        // Your existing logic to add new products to HTML
+    
     }
 }
 
