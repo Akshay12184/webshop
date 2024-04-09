@@ -76,7 +76,7 @@ border-radius: 20px;
     border-bottom: 1px solid #000000;
 }
 
-.edit-product-form {
+.add-product-form {
     width: 50%;
     margin: 20px auto;
     background-color: #ffffff;
@@ -85,17 +85,18 @@ border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.edit-product-form h2 {
+.add-product-form h2 {
     margin-bottom: 10px;
     color: #000000;
 }
 
-.edit-product-form label {
+.add-product-form label {
     display: block;
     margin-bottom: 8px;
 }
 
-.edit-product-form input[type="text"] {
+.add-product-form input[type="text"],
+.add-product-form input[type="file"] {
     width: calc(100% - 16px);
     padding: 8px;
     margin-bottom: 12px;
@@ -103,7 +104,7 @@ border-radius: 20px;
     border-radius: 4px;
 }
 
-.edit-product-form button {
+.add-product-form button {
     width: 100%;
     padding: 10px;
     background-color: #001aff;
@@ -113,7 +114,6 @@ border-radius: 20px;
     cursor: pointer;
 }
 
-.edit-product-form button:hover {
+.add-product-form button:hover {
     background-color: #0000ff;
 }
-
