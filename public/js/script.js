@@ -1,3 +1,5 @@
+import { NewData } from './products.js';
+
 let listProductHTML = document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
 let iconCart = document.querySelector('.icon-cart');
@@ -30,9 +32,15 @@ const addDataToHTML = () => {
             <div class="price">${product.price}</div>
             <button class="addCart">Add To Cart</button>`;
             listProductHTML.appendChild(newProduct);
+
+            // Add event listener for adding to cart
+            newProduct.querySelector('.addCart').addEventListener('click', () => {
+                addToCart(product.id);
+            });
         });
     }
 }
+
 
     listProductHTML.addEventListener('click', (event) => {
         let positionClick = event.target;
@@ -150,21 +158,16 @@ const changeQuantityCart = (product_id, type) => {
 }
 
 const initApp = () => {
-    // get product
     fetch('/info.json')
     .then(response => response.json())
     .then(data => {
         products = data;
         addDataToHTML();
 
-        // get cart info
         if(localStorage.getItem('cart')){
-            cart = JSON.parse(localStorage.getItem('cart'));
+            cart = JSON.parse(localStorage.getItem('cart')); 
             addCartToHTML();
         }
-
-        // Call refreshProductData to update products from localStorage
-        refreshProductData();
     })
 }
 

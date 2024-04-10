@@ -1,8 +1,9 @@
+export let NewData = [];
 let originalData = [];
 
 const resetTable = (data) => {
     const table = document.getElementById('productTable');
-    table.innerHTML = '';
+    table.innerHTM00L = '';
     populateTable(data);
 }
 
@@ -131,22 +132,3 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchOriginalData();
     });
 });
-
-
-function updateProductInTable(productName, productPrice, productImage) {
-    let originalData = JSON.parse(localStorage.getItem('productData')) || [];
-
-    const productIndex = originalData.findIndex(product => product.name === productName);
-    if (productIndex !== -1) {
-        originalData[productIndex].price = productPrice;
-        originalData[productIndex].image = productImage;
-
-        localStorage.setItem('productData', JSON.stringify(originalData));
-        resetTable(originalData);
-    }
-}
-
-function triggerDataRefresh() {
-    // Call the function to refresh product data
-    refreshProductData(); // Assuming refreshProductData is defined somewhere in your script
-}
