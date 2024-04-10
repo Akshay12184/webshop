@@ -34,12 +34,14 @@ const addDataToHTML = () => {
             listProductHTML.appendChild(newProduct);
 
             // Add event listener for adding to cart
-            newProduct.querySelector('.addCart').addEventListener('click', () => {
+            newProduct.querySelector('.addCart').addEventListener('click', (event) => {
+                event.stopPropagation(); // stop event propagation
                 addToCart(product.id);
             });
         });
     }
 }
+
 
 
     listProductHTML.addEventListener('click', (event) => {

@@ -3,9 +3,11 @@ let originalData = [];
 
 const resetTable = (data) => {
     const table = document.getElementById('productTable');
-    table.innerHTM00L = '';
+    console.log(table);
+    table.innerHTML = "";
     populateTable(data);
 }
+
 
 // Populates table with data 
 const populateTable = (data) => {
