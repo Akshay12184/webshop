@@ -1,5 +1,69 @@
 import { NewData } from './products.js';
 
+const jsonData = [
+    {
+        "id":  1,
+        "name": "Gaming Headset",
+        "amount": 20,
+        "price": 50,
+        "image": "/public/image/headset.webp"
+    },
+    {
+        "id": 2,
+        "name": "Gaming Keyboard",
+        "amount": 15,
+        "price": 80,
+        "image": "/public/image/keyboard2.avif"
+    },
+    {
+        "id": 3,
+        "name": "Razor Mouse",
+        "amount": 13,
+        "price": 50,
+        "image": "/public/image/mouse.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Alienware Monitor",
+        "amount": 10,
+        "price": 340,
+        "image": "/public/image/monitor.jpg"
+    },
+    {
+        "id": 5,
+        "name": "PS5",
+        "amount": 5,
+        "price": 540,
+        "image": "/public/image/ps5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Xbox X Series",
+        "amount": 5,
+        "price": 450,
+        "image": "/public/image/xbox.webp"
+    },
+    {
+        "id": 7,
+        "name": "Gaming Chair",
+        "amount": 3,
+        "price": 375,
+        "image": "/public/image/chair.webp"
+    },
+    {
+        "id": 8,
+        "name": "VR Headset",
+        "amount": 7,
+        "price": 246,
+        "image": "/public/image/vr2.jpg"
+    }
+];
+// strinified data 
+const jsonString = JSON.stringify(jsonData);
+localStorage.setItem('jsonData', jsonString);
+console.log('JSON data stored in localStorage:', jsonData);
+
+
 let listProductHTML = document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
 let iconCart = document.querySelector('.icon-cart');
@@ -160,19 +224,26 @@ const changeQuantityCart = (product_id, type) => {
 }
 
 const initApp = () => {
-    fetch('/info.json')
-    .then(response => response.json())
-    .then(data => {
-        products = data;
+    if(localStorage.getItem('jsonData')){
+        products = JSON.parse(localStorage.getItem('jsonData')); 
         addDataToHTML();
+    } else {
+        fetch('/info.json')
+            .then(response => response.json())
+            .then(data => {
+                products = data;
+                addDataToHTML();
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
 
-        if(localStorage.getItem('cart')){
-            cart = JSON.parse(localStorage.getItem('cart')); 
-            addCartToHTML();
-        }
-    })
+    if(localStorage.getItem('cart')){
+        cart = JSON.parse(localStorage.getItem('cart')); 
+        addCartToHTML();
+    }
 }
-
 
 initApp();
 

@@ -3,16 +3,23 @@ let originalData = [];
 
 const resetTable = (data) => {
     const table = document.getElementById('productTable');
-    console.log(table);
+    if (!table) {
+        console.error("Table element not found.");
+        return;
+    }
     table.innerHTML = "";
     populateTable(data);
 }
-
 
 // Populates table with data 
 const populateTable = (data) => {
     const table = document.getElementById('productTable');
     
+    if (!data || data.length === 0) {
+        console.error("Data is empty or undefined.");
+        return;
+    }
+
     const headerRow = table.insertRow();
     const headerKeys = Object.keys(data[0]);
     headerKeys.forEach(key => {
@@ -65,30 +72,26 @@ const populateTable = (data) => {
         removeButton.addEventListener('click', () => {
             const index = originalData.indexOf(item);
             originalData.splice(index, 1);
-            localStorage.setItem('productData', JSON.stringify(originalData)); // Change 'products' to 'productData'
+            localStorage.setItem('productData', JSON.stringify(originalData));
             resetTable(originalData);
         });
         removeCell.appendChild(removeButton);
     });
 }
 
+
 // Gets the original data from the JSON file
 const fetchOriginalData = () => {
-    fetch('/info.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            originalData = data;
-            resetTable(originalData);
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-        });
+    const savedData = localStorage.getItem('productData');
+    if (savedData) {
+        originalData = JSON.parse(savedData);
+        resetTable(originalData);
+    } else {
+        originalData = [];
+        resetTable(originalData);
+    }
 }
+
 
 const initapp = () => {
     const savedData = localStorage.getItem('productData');
@@ -100,7 +103,7 @@ const initapp = () => {
     }
 }
 
-// Resets local storage and displays original data 
+// can add items and Resets local storage and displays original data  
 document.addEventListener('DOMContentLoaded', () => {
     initapp();
 
@@ -130,7 +133,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const resetButton = document.getElementById('fetchButton');
     resetButton.addEventListener('click', () => {
-        localStorage.removeItem('productData');
-        fetchOriginalData();
+        fetch('/info.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                originalData = data;
+                localStorage.setItem('productData', JSON.stringify(originalData));
+                resetTable(originalData);
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
     });
 });
+
