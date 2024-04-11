@@ -1,115 +1,110 @@
 export let NewData = [];
-let originalData = [];
 
-const resetTable = (data) => {
-    const table = document.getElementById('productTable');
-    console.log('Table:', table);
-    if (!table) {
-        console.error("Table element not found.");
-        return;
-    }
-    table.innerHTML = "";
-    populateTable(data);
-}
-
-// Populates table with data 
-const populateTable = (data) => {
-    const table = document.getElementById('productTable');
-    
-    if (!data || data.length === 0) {
-        console.error("Data is empty or undefined.");
-        return;
-    }
-
-    const headerRow = table.insertRow();
-    const headerKeys = Object.keys(data[0]);
-    headerKeys.forEach(key => {
-        const headerCell = headerRow.insertCell();
-        headerCell.textContent = key;
-        headerCell.style.backgroundColor = "lightgrey";
-    });
-    const editHeaderCell = headerRow.insertCell();
-    editHeaderCell.textContent = 'Edit';
-    editHeaderCell.style.backgroundColor = 'lightgrey';
-
-    const removeHeaderCell = headerRow.insertCell();
-    removeHeaderCell.textContent = 'Remove';
-    removeHeaderCell.style.backgroundColor = 'lightgrey';
-
-    data.forEach(item => {
-        const row = table.insertRow();
-        headerKeys.forEach(key => {
-            const cell = row.insertCell();
-            if (key === 'image') {
-                const img = document.createElement('img');
-                img.src = item[key];
-                img.width = 50;
-                img.height = 50;
-                cell.appendChild(img);
-            } else {
-                cell.textContent = item[key];
-            }
-        });
-
-        const editCell = row.insertCell();
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.style.backgroundColor = 'blue';
-        editButton.style.color = 'white';
-        editButton.addEventListener('click', () => {
-            const queryParams = new URLSearchParams();
-            Object.entries(item).forEach(([key, value]) => {
-                queryParams.append(key, value);
-            });
-            window.location.href = `edit.html?${queryParams.toString()}`;
-        });
-        editCell.appendChild(editButton);
-
-        const removeCell = row.insertCell();
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove';
-        removeButton.style.backgroundColor = 'red';
-        removeButton.style.color = 'white';
-        removeButton.addEventListener('click', () => {
-            const index = originalData.indexOf(item);
-            originalData.splice(index, 1);
-            localStorage.setItem('productData', JSON.stringify(originalData));
-            resetTable(originalData);
-        });
-        removeCell.appendChild(removeButton);
-    });
-}
-
-
-// Gets the original data from the JSON file
-const fetchOriginalData = () => {
-    const savedData = localStorage.getItem('productData');
-    if (savedData) {
-        originalData = JSON.parse(savedData);
-        resetTable(originalData);
-    } else {
-        originalData = [];
-        resetTable(originalData);
-    }
-}
-
-
-const initapp = () => {
-    const savedData = localStorage.getItem('productData');
-    if (savedData) {
-        originalData = JSON.parse(savedData);
-        resetTable(originalData);
-    } else {
-        fetchOriginalData();
-    }
-}
-
-// can add items and Resets local storage and displays original data  
 document.addEventListener('DOMContentLoaded', () => {
-    initapp();
 
-    const addProductForm = document.getElementById('addProductForm');
-    addProductForm.addEventListener('submit', function(event) {
+    let originalData = [];
+
+    const resetTable = (data) => {
+        const table = document.querySelector('#productTable');
+        console.log('Table:', table);
+        if (!table) {
+            console.error("Table element not found.");
+            return;
+        }
+        table.innerHTML = "";
+        populateTable(data);
+    }
+
+    // Populates table with data 
+    const populateTable = (data) => { 
+        const table = document.getElementById('productTable');
+    
+        if (!data || data.length === 0) {
+            console.error("Data is empty or undefined.");
+            return;
+        }
+    
+        const headerKeys = Object.keys(data[0]);
+    
+        data.forEach(item => {
+            const row = table.insertRow();
+            headerKeys.forEach(key => {
+                const cell = row.insertCell();
+                if (key === 'image') {
+                    const img = document.createElement('img');
+                    img.src = item[key];
+                    img.width = 50;
+                    img.height = 50;
+                    cell.appendChild(img);
+                } else {
+                    cell.textContent = item[key];
+                }
+            });
+    
+            const editCell = row.insertCell();
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.style.backgroundColor = 'blue';
+            editButton.style.color = 'white';
+            editButton.addEventListener('click', () => {
+                const queryParams = new URLSearchParams();
+                Object.entries(item).forEach(([key, value]) => {
+                    queryParams.append(key, value);
+                });
+                window.location.href = `edit.html?${queryParams.toString()}`;
+            });
+            editCell.appendChild(editButton);
+    
+            const removeCell = row.insertCell();
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.style.backgroundColor = 'red';
+            removeButton.style.color = 'white';
+            removeButton.addEventListener('click', () => {
+                const index = originalData.indexOf(item);
+                originalData.splice(index, 1);
+                localStorage.setItem('productData', JSON.stringify(originalData));
+                table.deleteRow(row.rowIndex);
+            });
+            removeCell.appendChild(removeButton);
+        });
+    }
+
+
+    const fetchOriginalData = () => {
+        const savedData = localStorage.getItem('productData');
+        if (savedData) {
+            originalData = JSON.parse(savedData);
+            resetTable(originalData);
+        } else {
+            originalData = [];
+            resetTable(originalData);
+        }
+    }
+
+    const initapp = () => {
+        const savedData = localStorage.getItem('productData');
+        if (savedData) {
+            originalData = JSON.parse(savedData);
+            resetTable(originalData);
+        } else {
+            fetchOriginalData();
+        }
+    }
+
+    const updateDataArrays = (data) => {
+        NewData = data;
+        originalData = data.slice();
+        resetTable();
+    }
+
+    const addProductForm = document.querySelector('#addProductForm');
+    if (!addProductForm) {
+        console.error("Add product form element not found.");
+        return;
+    }
+
+    addProductForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
         const productName = document.getElementById('productName').value;
@@ -121,7 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const maxId = originalData.reduce((max, item) => Math.max(max, item.id), 0);
+        const newId = maxId + 1;
+
         const newProduct = {
+            id: newId,
             name: productName,
             price: productPrice,
             image: URL.createObjectURL(productImage)
@@ -150,5 +149,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Fetch error:', error);
             });
     });
+    initapp();
 });
-

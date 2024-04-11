@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateProductInTable(productName, editedProductName, editedProductPrice);
 
-        // Redirect back to products.html after editing
         window.location.href = 'products.html';
     });
 });
