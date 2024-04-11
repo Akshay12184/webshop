@@ -3,6 +3,7 @@ let originalData = [];
 
 const resetTable = (data) => {
     const table = document.getElementById('productTable');
+    console.log('Table:', table);
     if (!table) {
         console.error("Table element not found.");
         return;

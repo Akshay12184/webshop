@@ -2,7 +2,7 @@ import { NewData } from './products.js';
 
 const jsonData = [
     {
-        "id":  1,
+        "id":   1,
         "name": "Gaming Headset",
         "amount": 20,
         "price": 50,

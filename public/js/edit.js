@@ -25,41 +25,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateProductInTable(productName, editedProductName, editedProductPrice);
 
-        window.location.href = '/products.html';
+        // Redirect back to products.html after editing
+        window.location.href = 'products.html';
     });
 });
 
-function updateProductInTable(productName, editedProductName, editedProductPrice) {
-    let originalData = JSON.parse(localStorage.getItem('productData')) || [];
-
-    const index = originalData.findIndex(item => item.name === productName);
-
-    if (index !== -1) {
-        originalData[index].name = editedProductName;
-        originalData[index].price = editedProductPrice;
-
-        localStorage.setItem('productData', JSON.stringify(originalData));
-
-        updateTable(originalData);
-    }
-}
-
-
-
-
-function updateProductInTable(productName, productPrice) {
+function updateProductInTable(oldProductName, newProductName, newProductPrice) {
     let originalData = JSON.parse(localStorage.getItem('productData')) || [];
 
     console.log('Original Data:', originalData);
-    console.log('Product Name:', productName);
-    console.log('Product Price:', productPrice);
+    console.log('Old Product Name:', oldProductName);
+    console.log('New Product Name:', newProductName);
+    console.log('New Product Price:', newProductPrice);
 
-    const index = originalData.findIndex(item => item.name === productName);
+    const index = originalData.findIndex(item => item.name === oldProductName);
 
     console.log('Index:', index);
 
     if (index !== -1) {
-        originalData[index].price = productPrice;
+        originalData[index].name = newProductName;
+        originalData[index].price = newProductPrice;
 
         localStorage.setItem('productData', JSON.stringify(originalData));
 
@@ -69,9 +54,8 @@ function updateProductInTable(productName, productPrice) {
     }
 }
 
-
 function updateTable(data) {
-    const table = document.getElementById('productTable');
+    const table = document.getElementById('#productTable');
     table.innerHTML = '';
 
     data.forEach(product => {
@@ -81,7 +65,5 @@ function updateTable(data) {
 
         nameCell.textContent = product.name;
         priceCell.textContent = `$${product.price}`;
-
     });
 }
-
