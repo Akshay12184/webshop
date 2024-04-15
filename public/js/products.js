@@ -23,9 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Data is empty or undefined.");
             return;
         }
-    
+
         const headerKeys = Object.keys(data[0]);
-    
         data.forEach(item => {
             const row = table.insertRow();
             headerKeys.forEach(key => {
@@ -70,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     const fetchOriginalData = () => {
         const savedData = localStorage.getItem('productData');
         if (savedData) {
@@ -82,21 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const initapp = () => {
-        const savedData = localStorage.getItem('productData');
-        if (savedData) {
-            originalData = JSON.parse(savedData);
-            resetTable(originalData);
-        } else {
-            fetchOriginalData();
-        }
+const initapp = () => {
+    const savedData = localStorage.getItem('productData');
+    if (savedData) {
+        originalData = JSON.parse(savedData);
+        resetTable(originalData);
+    } else {
+        fetchOriginalData();
     }
+    console.log('updated data:', originalData);
+}
 
-    const updateDataArrays = (data) => {
-        NewData = data;
-        originalData = data.slice();
-        resetTable();
-    }
+
 
     const addProductForm = document.querySelector('#addProductForm');
     if (!addProductForm) {

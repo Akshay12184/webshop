@@ -54,7 +54,7 @@ function updateProductInTable(oldProductName, newProductName, newProductPrice) {
 }
 
 function updateTable(data) {
-    const table = document.getElementById('#productTable');
+    const table = document.getElementById('productTable');
     table.innerHTML = '';
 
     data.forEach(product => {

@@ -58,11 +58,40 @@ const jsonData = [
         "image": "/public/image/vr2.jpg"
     }
 ];
-// strinified data 
+// stringified data 
 const jsonString = JSON.stringify(jsonData);
 localStorage.setItem('jsonData', jsonString);
 console.log('JSON data stored in localStorage:', jsonData);
 
+const jsonDataString = localStorage.getItem('jsonData');
+
+let products = [];
+
+if (jsonDataString) {
+    products = JSON.parse(jsonDataString);
+}
+
+const initApp = () => {
+    if(localStorage.getItem('jsonData')){
+        products = JSON.parse(localStorage.getItem('jsonData')); 
+        addDataToHTML();
+    } else {
+        fetch('/info.json')
+            .then(response => response.json())
+            .then(data => {
+                products = data;
+                addDataToHTML();
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
+
+    if(localStorage.getItem('cart')){
+        cart = JSON.parse(localStorage.getItem('cart')); 
+        addCartToHTML();
+    }
+}
 
 let listProductHTML = document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
@@ -70,7 +99,6 @@ let iconCart = document.querySelector('.icon-cart');
 let iconCartSpan = document.querySelector('.icon-cart span');
 let body = document.querySelector('body');
 let closeCart = document.querySelector('.close');
-let products = [];
 let cart = [];
 
 iconCart.addEventListener('click', () => {
@@ -97,16 +125,37 @@ const addDataToHTML = () => {
             <button class="addCart">Add To Cart</button>`;
             listProductHTML.appendChild(newProduct);
 
-            // Add event listener for adding to cart
             newProduct.querySelector('.addCart').addEventListener('click', (event) => {
-                event.stopPropagation(); // stop event propagation
+                event.stopPropagation();
                 addToCart(product.id);
             });
         });
     }
 }
 
+const addNewItem = (item) => {
 
+    products.push(item);
+
+    let newProduct = document.createElement('div');
+    newProduct.dataset.id = item.id;
+    newProduct.classList.add('item');
+    newProduct.innerHTML = 
+    `<img src="${item.image}" alt="">
+    <h2>${item.name}</h2>
+    <div class="price">${item.price}</div>
+    <button class="addCart">Add To Cart</button>`;
+    listProductHTML.appendChild(newProduct);
+
+    newProduct.querySelector('.addCart').addEventListener('click', (event) => {
+        event.stopPropagation();
+        addToCart(item.id);
+    });
+}
+
+NewData.forEach(item => {
+    addNewItem(item);
+});
 
     listProductHTML.addEventListener('click', (event) => {
         let positionClick = event.target;
@@ -143,10 +192,10 @@ const addDataToHTML = () => {
             }
         }
     }
+    const addCartToMemory = () => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 
-const addCartToMemory = () => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
 const addCartToHTML = () => {
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
@@ -175,7 +224,7 @@ if (cart.length > 0) {
                 <span class="minus">-</span>
                 <span>${item.quantity}</span>
                 <span class="plus">+</span>
-            </div>
+            </div>  
         `;
         totalPrice += price * item.quantity;
     });
@@ -223,29 +272,6 @@ const changeQuantityCart = (product_id, type) => {
     addCartToMemory();
 }
 
-const initApp = () => {
-    if(localStorage.getItem('jsonData')){
-        products = JSON.parse(localStorage.getItem('jsonData')); 
-        addDataToHTML();
-    } else {
-        fetch('/info.json')
-            .then(response => response.json())
-            .then(data => {
-                products = data;
-                addDataToHTML();
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-            });
-    }
-
-    if(localStorage.getItem('cart')){
-        cart = JSON.parse(localStorage.getItem('cart')); 
-        addCartToHTML();
-    }
-}
-
-initApp();
 
 function showPopup() {
     const popupContainer = document.getElementById("popupContainer");
@@ -263,3 +289,11 @@ function confirmPurchase() {
     addCartToMemory();
     closePopup();
 }
+
+document.getElementById("confirmPurchaseButton").addEventListener("click", confirmPurchase);
+
+
+initApp();
+
+
+// linking localstorage have 2 seperate need 1 
