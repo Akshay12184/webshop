@@ -21,7 +21,7 @@ console.log(localStorage.getItem('productData'));
 const productData = JSON.parse(localStorage.getItem('productData'));
 
 const addDataToHTML = () => {
-    const products = productData; // Use productData instead of originalData
+    const products = productData;
 
     if (products && products.length > 0) {
         products.forEach(product => {
@@ -58,11 +58,10 @@ addDataToHTML();
     })
     const addToCart = (product_id) => {
         let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
-        let positionProduct = originalData.findIndex((value) => value.id == product_id);
-        
+        let positionProduct = productData.findIndex((value) => value.id == product_id);
+    
         if (positionProduct >= 0) {
-            let product = originalData[positionProduct];
-            if (product.amount > 0) {
+            let product = productData[positionProduct];
                 if (cart.length <= 0) {
                     cart = [{
                         product_id: product_id,
@@ -76,15 +75,14 @@ addDataToHTML();
                 } else {
                     cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
                 }
-                originalData[positionProduct].amount -= 1;
+                productData[positionProduct].amount -= 1;
                 addCartToHTML();
                 addCartToMemory();
             } else {
                 console.log('Maximum amount reached for this product.');
             }
         }
-    }
-    
+
 
     const addCartToHTML = () => {
         listCartHTML.innerHTML = '';
@@ -97,9 +95,8 @@ addDataToHTML();
                 newItem.classList.add('item');
                 newItem.dataset.id = item.product_id;
     
-                // Use originalData instead of products here
-                let positionProduct = originalData.findIndex((value) => value.id == item.product_id);
-                let info = originalData[positionProduct];
+                let positionProduct = productData.findIndex((value) => value.id == item.product_id);
+                let info = productData[positionProduct];
                 listCartHTML.appendChild(newItem);
     
                 let price = parseFloat(info.price);
@@ -129,6 +126,10 @@ addDataToHTML();
         listCartHTML.appendChild(totalElement);
     }
     
+    const addCartToMemory = () => {
+        localStorage.setItem('cartData', JSON.stringify(cart));
+    }
+    
 
 listCartHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
@@ -141,6 +142,7 @@ listCartHTML.addEventListener('click', (event) => {
         changeQuantityCart(product_id, type);
     }
 })
+
 const changeQuantityCart = (product_id, type) => {
     let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
     if(positionItemInCart >= 0){
@@ -170,6 +172,7 @@ function showPopup() {
     popupContainer.style.display = "block";
 }
 
+
 function closePopup() {
     const popupContainer = document.getElementById("popupContainer");
     popupContainer.style.display = "none";
@@ -183,7 +186,6 @@ function confirmPurchase() {
 }
 
 document.getElementById("confirmPurchaseButton").addEventListener("click", confirmPurchase);
+document.getElementById("checkoutButton").addEventListener("click", showPopup);
 
 initApp();
-
-// linking localstorage have 2 seperate need 1 

@@ -26,8 +26,8 @@ header{
 .icon-cart span{
     position: absolute;
     background-color: red;
-    width: 30px;
-    height: 30px;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
