@@ -1,4 +1,7 @@
-export let NewData = [];
+export const initApp = () => {
+
+}
+export let originalData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -80,24 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-const initapp = () => {
-    const savedData = localStorage.getItem('productData');
-    if (savedData) {
-        originalData = JSON.parse(savedData);
-        resetTable(originalData);
-    } else {
-        fetchOriginalData();
+    const initApp = () => {
+        const savedData = localStorage.getItem('productData');
+        if (savedData) {
+            originalData = JSON.parse(savedData); 
+            resetTable(originalData);
+        } else {
+            fetchOriginalData();
+        }
+        console.log('updated data:', originalData);
     }
-    console.log('updated data:', originalData);
-}
 
-
-
-    const addProductForm = document.querySelector('#addProductForm');
-    if (!addProductForm) {
-        console.error("Add product form element not found.");
-        return;
-    }
 
     addProductForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -144,5 +140,5 @@ const initapp = () => {
                 console.error('Fetch error:', error);
             });
     });
-    initapp();
+    initApp();
 });

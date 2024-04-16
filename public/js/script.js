@@ -1,97 +1,6 @@
-import { NewData } from './products.js';
+import { initApp, originalData } from './products.js';
 
-const jsonData = [
-    {
-        "id":   1,
-        "name": "Gaming Headset",
-        "amount": 20,
-        "price": 50,
-        "image": "/public/image/headset.webp"
-    },
-    {
-        "id": 2,
-        "name": "Gaming Keyboard",
-        "amount": 15,
-        "price": 80,
-        "image": "/public/image/keyboard2.avif"
-    },
-    {
-        "id": 3,
-        "name": "Razor Mouse",
-        "amount": 13,
-        "price": 50,
-        "image": "/public/image/mouse.jpg"
-    },
-    {
-        "id": 4,
-        "name": "Alienware Monitor",
-        "amount": 10,
-        "price": 340,
-        "image": "/public/image/monitor.jpg"
-    },
-    {
-        "id": 5,
-        "name": "PS5",
-        "amount": 5,
-        "price": 540,
-        "image": "/public/image/ps5.jpg"
-    },
-    {
-        "id": 6,
-        "name": "Xbox X Series",
-        "amount": 5,
-        "price": 450,
-        "image": "/public/image/xbox.webp"
-    },
-    {
-        "id": 7,
-        "name": "Gaming Chair",
-        "amount": 3,
-        "price": 375,
-        "image": "/public/image/chair.webp"
-    },
-    {
-        "id": 8,
-        "name": "VR Headset",
-        "amount": 7,
-        "price": 246,
-        "image": "/public/image/vr2.jpg"
-    }
-];
-// stringified data 
-const jsonString = JSON.stringify(jsonData);
-localStorage.setItem('jsonData', jsonString);
-console.log('JSON data stored in localStorage:', jsonData);
-
-const jsonDataString = localStorage.getItem('jsonData');
-
-let products = [];
-
-if (jsonDataString) {
-    products = JSON.parse(jsonDataString);
-}
-
-const initApp = () => {
-    if(localStorage.getItem('jsonData')){
-        products = JSON.parse(localStorage.getItem('jsonData')); 
-        addDataToHTML();
-    } else {
-        fetch('/info.json')
-            .then(response => response.json())
-            .then(data => {
-                products = data;
-                addDataToHTML();
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-            });
-    }
-
-    if(localStorage.getItem('cart')){
-        cart = JSON.parse(localStorage.getItem('cart')); 
-        addCartToHTML();
-    }
-}
+initApp();
 
 let listProductHTML = document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
@@ -108,21 +17,22 @@ closeCart.addEventListener('click', () => {
     body.classList.toggle('showCart');
 })
 
-const addDataToHTML = () => {
-    // removes data default from HTML
+console.log(localStorage.getItem('productData'));
 
-    // adds new data 
-    if(products.length > 0) // if product has data
-    {
+
+const addDataToHTML = () => {
+    const products = productData;
+
+    if (products && products.length > 0) {
         products.forEach(product => {
             let newProduct = document.createElement('div');
             newProduct.dataset.id = product.id;
             newProduct.classList.add('item');
-            newProduct.innerHTML = 
-            `<img src="${product.image}" alt="">
-            <h2>${product.name}</h2>
-            <div class="price">${product.price}</div>
-            <button class="addCart">Add To Cart</button>`;
+            newProduct.innerHTML = `
+                <img src="${product.image}" alt="">
+                <h2>${product.name}</h2>
+                <div class="price">${product.price}</div>
+                <button class="addCart">Add To Cart</button>`;
             listProductHTML.appendChild(newProduct);
 
             newProduct.querySelector('.addCart').addEventListener('click', (event) => {
@@ -133,30 +43,11 @@ const addDataToHTML = () => {
     }
 }
 
-const addNewItem = (item) => {
+addDataToHTML();
 
-    products.push(item);
 
-    let newProduct = document.createElement('div');
-    newProduct.dataset.id = item.id;
-    newProduct.classList.add('item');
-    newProduct.innerHTML = 
-    `<img src="${item.image}" alt="">
-    <h2>${item.name}</h2>
-    <div class="price">${item.price}</div>
-    <button class="addCart">Add To Cart</button>`;
-    listProductHTML.appendChild(newProduct);
 
-    newProduct.querySelector('.addCart').addEventListener('click', (event) => {
-        event.stopPropagation();
-        addToCart(item.id);
-    });
-}
-
-NewData.forEach(item => {
-    addNewItem(item);
-});
-
+// everything that has to do with the cart and its logic
     listProductHTML.addEventListener('click', (event) => {
         let positionClick = event.target;
         if(positionClick.classList.contains('addCart')){
@@ -166,10 +57,10 @@ NewData.forEach(item => {
     })
     const addToCart = (product_id) => {
         let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
-        let positionProduct = products.findIndex((value) => value.id == product_id);
+        let positionProduct = originalData.findIndex((value) => value.id == product_id);
         
         if (positionProduct >= 0) {
-            let product = products[positionProduct];
+            let product = originalData[positionProduct];
             if (product.amount > 0) {
                 if (cart.length <= 0) {
                     cart = [{
@@ -184,7 +75,7 @@ NewData.forEach(item => {
                 } else {
                     cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
                 }
-                products[positionProduct].amount -= 1;
+                originalData[positionProduct].amount -= 1;
                 addCartToHTML();
                 addCartToMemory();
             } else {
@@ -192,51 +83,51 @@ NewData.forEach(item => {
             }
         }
     }
-    const addCartToMemory = () => {
-        localStorage.setItem('cart', JSON.stringify(cart));
+    
+
+    const addCartToHTML = () => {
+        listCartHTML.innerHTML = '';
+        let totalQuantity = 0;
+        let totalPrice = 0;
+        if (cart.length > 0) {
+            cart.forEach(item => {
+                totalQuantity += item.quantity;
+                let newItem = document.createElement('div');
+                newItem.classList.add('item');
+                newItem.dataset.id = item.product_id;
+    
+                // Use originalData instead of products here
+                let positionProduct = originalData.findIndex((value) => value.id == item.product_id);
+                let info = originalData[positionProduct];
+                listCartHTML.appendChild(newItem);
+    
+                let price = parseFloat(info.price);
+                newItem.innerHTML = `
+                    <div class="image">
+                        <img src="${info.image}">
+                    </div>
+                    <div class="name">
+                        ${info.name}
+                    </div>
+                    <div class="totalPrice">$${(price * item.quantity).toFixed(2)}</div>
+                    <div class="quantity">
+                        <span class="minus">-</span>
+                        <span>${item.quantity}</span>
+                        <span class="plus">+</span>
+                    </div>  
+                `;
+                totalPrice += price * item.quantity;
+            });
+        }
+    
+        iconCartSpan.innerText = totalQuantity;
+    
+        let totalElement = document.createElement('div');
+        totalElement.classList.add('total');
+        totalElement.innerText = `Total: $${totalPrice.toFixed(2)}`;
+        listCartHTML.appendChild(totalElement);
     }
-
-const addCartToHTML = () => {
-    listCartHTML.innerHTML = '';
-    let totalQuantity = 0;
-    let totalPrice = 0;
-if (cart.length > 0) {
-    cart.forEach(item => {
-        totalQuantity += item.quantity;
-        let newItem = document.createElement('div');
-        newItem.classList.add('item');
-        newItem.dataset.id = item.product_id;
-
-        let positionProduct = products.findIndex((value) => value.id == item.product_id);
-        let info = products[positionProduct];
-        listCartHTML.appendChild(newItem);
-
-        let price = parseFloat(info.price);
-        newItem.innerHTML = `
-            <div class="image">
-                <img src="${info.image}">
-            </div>
-            <div class="name">
-                ${info.name}
-            </div>
-            <div class="totalPrice">$${(price * item.quantity).toFixed(2)}</div>
-            <div class="quantity">
-                <span class="minus">-</span>
-                <span>${item.quantity}</span>
-                <span class="plus">+</span>
-            </div>  
-        `;
-        totalPrice += price * item.quantity;
-    });
-}
-
-    iconCartSpan.innerText = totalQuantity;
-
-    let totalElement = document.createElement('div');
-    totalElement.classList.add('total');
-    totalElement.innerText = `Total: $${totalPrice.toFixed(2)}`;
-    listCartHTML.appendChild(totalElement);
-}
+    
 
 listCartHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
@@ -292,8 +183,6 @@ function confirmPurchase() {
 
 document.getElementById("confirmPurchaseButton").addEventListener("click", confirmPurchase);
 
-
 initApp();
-
 
 // linking localstorage have 2 seperate need 1 
