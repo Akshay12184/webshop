@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log('updated data:', originalData);
     }
-
+    
 
     addProductForm.addEventListener('submit', function (event) {
         event.preventDefault();

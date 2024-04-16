@@ -18,10 +18,10 @@ closeCart.addEventListener('click', () => {
 })
 
 console.log(localStorage.getItem('productData'));
-
+const productData = JSON.parse(localStorage.getItem('productData'));
 
 const addDataToHTML = () => {
-    const products = productData;
+    const products = productData; // Use productData instead of originalData
 
     if (products && products.length > 0) {
         products.forEach(product => {
@@ -44,6 +44,7 @@ const addDataToHTML = () => {
 }
 
 addDataToHTML();
+
 
 
 
