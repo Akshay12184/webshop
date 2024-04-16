@@ -142,3 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     initApp();
 });
+
+
+//todo: ervoor zorgen dat je 4 images kan kiezen zodat ze blijven en aleen dat je de url pakt niet de hele directory erheen
