@@ -1,18 +1,27 @@
 
 body {
     font-family: Poppins;
-    background-color: rgb(79, 79, 255);
+    background: rgb(76,76,181);
+    background: linear-gradient(90deg, rgba(76,76,181,1) 0%, rgba(23,23,227,1) 88%, rgba(76,76,181,1) 100%);
 }
+.navbar {
+    background-color: rgb(219, 218, 218);
+    text-align: center;
+    border-radius: 30px;
+    margin-bottom: 40px;
+}
+
 header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding: 20px 0;
 
 }
 .title{
-    font-size: xx-large;
+    font-size: x-large;
     color: #000000;
+    margin-left: 20px;
 }
 .container{
     width: 900px;
@@ -24,24 +33,18 @@ header{
     transition: transform .5s;
 }
 #Btn1 {
-    background-color: #000000;
-    color: #ffffff;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
     border-radius: 20px;
 }
 #Btn2 {
-    background-color: #001aff;
-    color: #ffffff;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
     border-radius: 20px;
 }
 .btn3 {
-background-color: #ffffff;
-color: #000000;
 border: none;
 padding: 5px 10px;
 margin-top: 10px;
@@ -49,8 +52,6 @@ border-radius: 20px;
 }
 
 #btn4 {
-background-color: #000000;
-color: #ffffff;
 border: none;
 padding: 5px 10px;
 margin-top: 10px;

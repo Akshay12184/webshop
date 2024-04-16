@@ -1,7 +1,8 @@
 body{
     margin: 0;
     font-family: Poppins;
-    background-color: rgb(79, 79, 255);
+    background: rgb(76,76,181);
+    background: linear-gradient(90deg, rgba(76,76,181,1) 0%, rgba(23,23,227,1) 88%, rgba(76,76,181,1) 100%);
 }
 .container{
     width: 900px;
@@ -19,7 +20,7 @@ body{
     margin-bottom: 40px;
 }
 .title{
-    font-size: medium;
+    font-size: x-large;
     color: #000000;
     margin-left: 20px;
 }

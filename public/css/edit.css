@@ -1,20 +1,27 @@
 
 body {
     font-family: Poppins;
-    background-color: rgb(79, 79, 255);
+    background: rgb(76,76,181);
+    background: linear-gradient(90deg, rgba(76,76,181,1) 0%, rgba(23,23,227,1) 88%, rgba(76,76,181,1) 100%);
 }
+
+.title{
+    font-size: x-large;
+    color: #000000;
+    margin-left: 20px;
+}
+
 header{
+    background-color: rgb(219, 218, 218);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding: 20px 0;
+    border-radius: 30px;
 }
-.title{
-    font-size: xx-large;
-    color: #000000;
-}
+
 .container{
-    width: 900px;
+    width: 900rem;
     margin: auto;
     max-width: 90vw;
     text-align: center;
@@ -22,16 +29,12 @@ header{
     transition: transform .5s;
 }
 #Btn1 {
-    background-color: #000000;
-    color: #ffffff;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
     border-radius: 20px;
 }
 #Btn2 {
-    background-color: #000000;
-    color: #eee;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
