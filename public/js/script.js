@@ -62,27 +62,32 @@ addDataToHTML();
     
         if (positionProduct >= 0) {
             let product = productData[positionProduct];
-                if (cart.length <= 0) {
-                    cart = [{
-                        product_id: product_id,
-                        quantity: 1
-                    }];
-                } else if (positionThisProductInCart < 0) {
-                    cart.push({
-                        product_id: product_id,
-                        quantity: 1
-                    });
-                } else {
-                    cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
-                }
-                productData[positionProduct].amount -= 1;
-                addCartToHTML();
-                addCartToMemory();
-            } else {
+            if (product.amount <= 0) {
                 console.log('Maximum amount reached for this product.');
+                return;
             }
+            if (cart.length <= 0) {
+                cart = [{
+                    product_id: product_id,
+                    quantity: 1
+                }];
+            } else if (positionThisProductInCart < 0) {
+                cart.push({
+                    product_id: product_id,
+                    quantity: 1
+                });
+            } else {
+                cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
+            }
+            if (product.amount > 0) {
+                productData[positionProduct].amount -= 1;
+            }
+            addCartToHTML();
+            addCartToMemory();
+        } else {
+            console.log('Product not found.');
         }
-
+    }
 
     const addCartToHTML = () => {
         listCartHTML.innerHTML = '';

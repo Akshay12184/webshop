@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
 
-    addProductForm.addEventListener('submit', function (event) {
+        addProductForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
         const productName = document.getElementById('productName').value;
