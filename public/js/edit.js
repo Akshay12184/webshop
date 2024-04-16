@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('productPrice').value = productPrice;
 
     const editProductForm = document.getElementById('editProductForm');
+    const submitButton = document.getElementById('submitButton');
 
     editProductForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -25,44 +26,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateProductInTable(productName, editedProductName, editedProductPrice);
 
-        window.location.href = 'products.html';
+        // No need to redirect here, handle it with the submit button click event
     });
-});
 
-function updateProductInTable(oldProductName, newProductName, newProductPrice) {
-    let originalData = JSON.parse(localStorage.getItem('productData')) || [];
+    submitButton.addEventListener('click', function() {
+        window.location.href = '/products.html';
+    });
 
-    console.log('Original Data:', originalData);
-    console.log('Old Product Name:', oldProductName);
-    console.log('New Product Name:', newProductName);
-    console.log('New Product Price:', newProductPrice);
+    function updateProductInTable(oldProductName, newProductName, newProductPrice) {
+        let originalData = JSON.parse(localStorage.getItem('productData')) || [];
 
-    const index = originalData.findIndex(item => item.name === oldProductName);
+        console.log('Original Data:', originalData);
+        console.log('Old Product Name:', oldProductName);
+        console.log('New Product Name:', newProductName);
+        console.log('New Product Price:', newProductPrice);
 
-    console.log('Index:', index);
+        const index = originalData.findIndex(item => item.name === oldProductName);
 
-    if (index !== -1) {
-        originalData[index].name = newProductName;
-        originalData[index].price = newProductPrice;
+        console.log('Index:', index);
 
-        localStorage.setItem('productData', JSON.stringify(originalData));
+        if (index !== -1) {
+            originalData[index].name = newProductName;
+            originalData[index].price = newProductPrice;
 
-        console.log('Updated Original Data:', originalData);
+            localStorage.setItem('productData', JSON.stringify(originalData));
 
-        updateTable(originalData);
+            console.log('Updated Original Data:', originalData);
+
+            updateTable(originalData);
+        }
     }
-}
 
-function updateTable(data) {
-    const table = document.getElementById('productTable');
-    table.innerHTML = '';
+    function updateTable(data) {
+        const table = document.getElementById('productTable');
+        table.innerHTML = '';
 
-    data.forEach(product => {
-        const row = table.insertRow();
-        const nameCell = row.insertCell();
-        const priceCell = row.insertCell();
+        data.forEach(product => {
+            const row = table.insertRow();
+            const nameCell = row.insertCell();
+            const priceCell = row.insertCell();
 
-        nameCell.textContent = product.name;
-        priceCell.textContent = `$${product.price}`;
-    });
-}
+            nameCell.textContent = product.name;
+            priceCell.textContent = `$${product.price}`;
+        });
+    }
+});
