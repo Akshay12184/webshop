@@ -105,24 +105,22 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please fill in all fields and select an image.');
             return;
         }
+
+        const imagePath = `/public/image/productimg/${productImage.name}`;
     
-        const reader = new FileReader();
-        reader.onload = function () {
-            const maxId = originalData.reduce((max, item) => Math.max(max, item.id), 0);
-            const newId = maxId + 1;
+        const maxId = originalData.reduce((max, item) => Math.max(max, item.id), 0);
+        const newId = maxId + 1;
     
-            const newProduct = {
-                id: newId,
-                name: productName,
-                price: productPrice,
-                image: reader.result
-            };
-            originalData.push(newProduct);
-            localStorage.setItem('productData', JSON.stringify(originalData));
-            resetTable(originalData);
-            addProductForm.reset();
+        const newProduct = {
+            id: newId,
+            name: productName,
+            price: productPrice,
+            image: imagePath
         };
-        reader.readAsDataURL(productImage);
+        originalData.push(newProduct);
+        localStorage.setItem('productData', JSON.stringify(originalData));
+        resetTable(originalData);
+        addProductForm.reset();
     });
 
     const resetButton = document.getElementById('fetchButton');
