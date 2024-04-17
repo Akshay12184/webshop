@@ -93,33 +93,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log('updated data:', originalData);
     }
-    
 
-        addProductForm.addEventListener('submit', function (event) {
+    addProductForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
+    
         const productName = document.getElementById('productName').value;
         const productPrice = document.getElementById('productPrice').value;
         const productImage = document.getElementById('productImage').files[0];
-
+    
         if (!productName || !productPrice || !productImage) {
             alert('Please fill in all fields and select an image.');
             return;
         }
-
-        const maxId = originalData.reduce((max, item) => Math.max(max, item.id), 0);
-        const newId = maxId + 1;
-
-        const newProduct = {
-            id: newId,
-            name: productName,
-            price: productPrice,
-            image: URL.createObjectURL(productImage)
+    
+        const reader = new FileReader();
+        reader.onload = function () {
+            const maxId = originalData.reduce((max, item) => Math.max(max, item.id), 0);
+            const newId = maxId + 1;
+    
+            const newProduct = {
+                id: newId,
+                name: productName,
+                price: productPrice,
+                image: reader.result
+            };
+            originalData.push(newProduct);
+            localStorage.setItem('productData', JSON.stringify(originalData));
+            resetTable(originalData);
+            addProductForm.reset();
         };
-        originalData.push(newProduct);
-        localStorage.setItem('productData', JSON.stringify(originalData));
-        resetTable(originalData);
-        addProductForm.reset();
+        reader.readAsDataURL(productImage);
     });
 
     const resetButton = document.getElementById('fetchButton');
@@ -142,6 +145,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     initApp();
 });
-
-
-//todo: ervoor zorgen dat je 4 images kan kiezen zodat ze blijven en aleen dat je de url pakt niet de hele directory erheen

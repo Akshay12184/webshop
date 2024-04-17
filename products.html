@@ -25,6 +25,7 @@
         </table>
     </div>
     
+
     <div class="add-product-form" method="post">
         <h2>Add Product</h2>
         <form id="addProductForm">
@@ -32,7 +33,8 @@
             <input type="text" id="productName" name="productName"><br>
             <label for="productPrice">Product Price:</label>
             <input type="text" id="productPrice" name="productPrice"><br> 
-            <input type="file" id="productImage" name="productImage">
+            <input type="file" id="productImage" name="productImage" accept="image/*">
+            <img id="imagePreview" src="#" alt="Preview" style="display:none; width: 170px; height: 95.63px;">
             <button type="submit">Add</button>
         </form>
     </div>
