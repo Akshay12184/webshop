@@ -51,7 +51,9 @@ header{
 }
 
 .listProduct .item img{
-    width: 100%;
+    width: 170px;
+    height: 95.63px;
+    object-fit: cover;
 }
 .listProduct{
     display: grid;
