@@ -1,38 +1,47 @@
 body{
-    margin: 0;
     font-family: Poppins;
-    background: rgb(76,76,181);
-    background: linear-gradient(90deg, rgba(76,76,181,1) 0%, rgba(23,23,227,1) 88%, rgba(76,76,181,1) 100%);
+    background: rgb(233, 230, 230);
 }
-.container{
-    width: 900px;
+.container {
+    width: 1000px;
     margin: auto;
-    max-width: 90vw;
+    max-width: 100vw;
     text-align: center;
-    padding-top: 10px;
     transition: transform .5s;
     color: black;
 }
+
 .navbar {
-    background-color: rgb(219, 218, 218);
+    background-color: rgb(196, 191, 191);
     text-align: center;
     border-radius: 30px;
     margin-bottom: 40px;
 }
-.title{
+
+#logo {
+    margin-left: 10px;
+    max-width: 75px;
+    max-height: 100px;
+    border-radius: 50px;
+}
+
+.title {
     font-size: x-large;
     color: #000000;
     margin-left: 20px;
 }
-svg{
+
+svg {
     width: 30px;
 }
-header{
+
+header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     padding: 30px 0;
 }
+
 .icon-cart{
     position: relative;
 }
@@ -61,7 +70,7 @@ header{
     gap: 20px;
 }
 .listProduct .item{
-    background-color: #ffffff;
+    background-color: rgb(214, 209, 203);
     padding: 20px;
     border-radius: 20px;
 }
@@ -111,7 +120,9 @@ button.addCart.outOfStock {
     display: grid;
     grid-template-rows: 70px 1fr 70px;
     transition: .5s;
+    z-index: 1000; /* Ensure it appears above other elements */
 }
+
 body.showCart .cartTab{
     right: 0;
 }
@@ -204,6 +215,15 @@ body.showCart .container{
     font-weight: 500;
     cursor: pointer;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #d8d5d5;
+    text-align: center;
+}
+
 @media only screen and (max-width: 992px) {
     .listProduct{
         grid-template-columns: repeat(3, 1fr);
