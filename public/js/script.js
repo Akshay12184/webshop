@@ -34,7 +34,6 @@ const addDataToHTML = () => {
                 <div class="price">${product.price}</div>
                 <button class="addCart">Add To Cart</button>`;
             listProductHTML.appendChild(newProduct);
-
             newProduct.querySelector('.addCart').addEventListener('click', (event) => {
                 event.stopPropagation();
                 addToCart(product.id);
