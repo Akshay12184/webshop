@@ -4,6 +4,7 @@
 **why did i make an techwebshop?**
 1. if made an tech webshop because i like working with tech and it looked like an cool idea. 
 2. plan to make the webshop(info is in dutch): https://www.figma.com/file/x4VZmBFS9BpqwoA0oOYjyl/plan-van-aanpak?type=whiteboard&node-id=0%3A1&t=Pkz3DdrJi4QscYmr-1
+3. link to an example of how it could look: https://www.figma.com/file/2QKRfAjoDP1SMwMT7bMR71/Untitled?type=whiteboard&node-id=0%3A1&t=tXvyGikC1ZWHSAmD-1
 ---
 # how to find the project online: 
 
