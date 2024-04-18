@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateProductInTable(productName, editedProductName, editedProductPrice);
 
-        // No need to redirect here, handle it with the submit button click event
     });
 
     submitButton.addEventListener('click', function() {
@@ -37,10 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let originalData = JSON.parse(localStorage.getItem('productData')) || [];
 
         console.log('Original Data:', originalData);
-        console.log('Old Product Name:', oldProductName);
-        console.log('New Product Name:', newProductName);
-        console.log('New Product Price:', newProductPrice);
-
         const index = originalData.findIndex(item => item.name === oldProductName);
 
         console.log('Index:', index);

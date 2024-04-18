@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     cell.textContent = item[key];
                 }
             });
-    
             const editCell = row.insertCell();
             const editButton = document.createElement('button');
             editButton.textContent = 'Edit';
@@ -56,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = `edit.html?${queryParams.toString()}`;
             });
             editCell.appendChild(editButton);
-    
+
             const removeCell = row.insertCell();
             const removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
@@ -96,21 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addProductForm.addEventListener('submit', function (event) {
         event.preventDefault();
-    
+
         const productName = document.getElementById('productName').value;
         const productPrice = document.getElementById('productPrice').value;
         const productImage = document.getElementById('productImage').files[0];
-    
+
         if (!productName || !productPrice || !productImage) {
             alert('Please fill in all fields and select an image.');
             return;
         }
 
         const imagePath = `/public/image/productimg/${productImage.name}`;
-    
+
         const maxId = originalData.reduce((max, item) => Math.max(max, item.id), 0);
         const newId = maxId + 1;
-    
+
         const newProduct = {
             id: newId,
             name: productName,
