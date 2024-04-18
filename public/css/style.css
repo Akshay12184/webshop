@@ -1,5 +1,8 @@
 body{
-    font-family: Poppins;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
     background: rgb(233, 230, 230);
 }
 .container {

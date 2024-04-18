@@ -1,6 +1,9 @@
 
 body {
-    font-family: Poppins;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
     background-color: white;
 }
 .navbar {
