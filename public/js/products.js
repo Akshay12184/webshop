@@ -1,10 +1,9 @@
 export const initApp = () => {
 
-}
-export let originalData = [];
+};
+export const originalData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-
     let originalData = [];
 
     const resetTable = (data) => {
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateTable(data);
     }
 
-    // Populates table with data 
+// Populates table with data 
     const populateTable = (data) => { 
         const table = document.getElementById('productTable');
     
@@ -106,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const imagePath = `/public/image/productimg/${productImage.name}`;
-
         const maxId = originalData.reduce((max, item) => Math.max(max, item.id), 0);
         const newId = maxId + 1;
 
