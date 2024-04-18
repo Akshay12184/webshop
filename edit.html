@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit products</title>
-    <link rel="stylesheet" href="/public/css/edit.css">
-    <script src="/public/js/edit.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <title>products</title>
+    <link rel="stylesheet" href="/public/css/products.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap">
 </head>
 <body>
 
-    <div class="container">
-        <div class="navbar"></div>
+<div class="container">
+    <div class="navbar">
         <header>
             <img id="logo" src="/public/image/productImg/Screenshot%202024-04-17%20113730.png" alt="logo">
-            <div class="title">edit panel</div>
-            <a href="admin.html">
-                <button id="Btn1">
-                    <img src="/public/image/IconImg/product-delivery.png" alt="orders">
-                </button>
-            </a>
-            <a href="products.html">
-                <button id="Btn2">
-                    <img src="/public/image/IconImg/package.png" alt="products">
-                </button>
-            </a>
+            <div class="title">products panel</div>
+            <a href="index.html" id="btn4"><img src="/public/image/IconImg/home-icon-silhouette.png" alt="home"></a>
+            <a href="admin.html" id="Btn1"><img src="/public/image/IconImg/product-delivery.png" alt="orders"></a>
+            <a href="products.html" id="Btn2"><img src="/public/image/IconImg/package.png" alt="products"></a>
+            <button class="btn3" id="fetchButton"><img src="/public/image/IconImg/reset.png" alt="reset"></button>
         </header>
     </div>
-    
+</div>
 
-    <div class="edit-product-form">
-        <h2>Edit Product</h2>
-        <form id="editProductForm" method="post">
-            <label for="productName">Product Name:</label>
-            <input type="text" id="productName" name="productName"><br>
-            <label for="productPrice">Product Price:</label>
-            <input type="text" id="productPrice" name="productPrice"><br> 
-            <input type="file" id="productImage" name="productImage">
-            <button type="submit">Edit</button>
-        </form>
-    </div>
+<div class="ProductContainer">
+    <table id="productTable">
 
+    </table>
+</div>
+
+<div class="add-product-form">
+    <h2>Add Product</h2>
+    <form id="addProductForm" method="post">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName"><br>
+        <label for="productPrice">Product Price:</label>
+        <input type="text" id="productPrice" name="productPrice"><br> 
+        <input type="file" id="productImage" name="productImage" accept="image/*">
+        <img id="imagePreview" src="#" alt="Preview" style="display:none; width: 170px; height: 95.63px;">
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+<script type="module" src="/public/js/script.js"></script>
+<script type="module" src="/public/js/products.js"></script>
 </body>
 </html>
